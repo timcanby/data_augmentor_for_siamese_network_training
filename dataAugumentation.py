@@ -1,6 +1,6 @@
 print(__doc__)
 
-
+import argparse
 import numpy as np
 import random
 
@@ -63,7 +63,7 @@ def getfileFromfilter(rootdir):
             ReturnList.append(path)
     return (ReturnList)
 
-def CreatDir(Language):
+def CreatDir(Language,Probability):
     import shutil
     imagelist=getfileFromfilter(Language)
     mkdir('images_background/')
@@ -75,9 +75,14 @@ def CreatDir(Language):
         RandomAffine('images_background/' + str(Language)+'/'+str(image.split('/')[-1].split(".")[0]),str(Language),str(image.split('/')[-1].split(".")[0]),19)
         characterlist = getfileFromfilter('images_background/' + str(Language)+'/'+str(image.split('/')[-1].split(".")[0]))
         for eachcharacter in characterlist:
-            if random.uniform(0.0,1.0)>0.5:
+            if random.uniform(0.0,1.0)<Probability:
                 addCirclenoise(eachcharacter,5,random.uniform(0.0,1.0))
 
+parser = argparse.ArgumentParser(description='Generated from the oneshot data can be used to to twin network')
+parser.add_argument('--ImageDir_Selecter', dest='dir_path', type=str, default='japanese', help='Enter the directory name you want to process')
 
+parser = argparse.ArgumentParser(description='Probability of put noise to image (from 0 to 1)')
+parser.add_argument('--Probability', dest='Probability', type=int, default=0.5, help='Probability of put noise to image (from 0 to 1)')
+args = parser.parse_args()
 
-CreatDir('japanese')
+CreatDir(args.dir_path,args.Probability)
