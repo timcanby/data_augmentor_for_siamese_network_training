@@ -2,7 +2,7 @@
  Generated from the oneshot data can be used to to twin network
 
  
- ![](image/anigig.gif)
+ ![](image/anigif.gif)
  
 
  ![](image/image11.jpg)
@@ -11,7 +11,7 @@
  
  Run:
  ```python
- python3 Binarization.py --ImageSelecter=imageDir(default='test.jpg') --clusters=K
+ python3 dataAugumentation.py ----ImageDir_Selecter=imageDir(default='japanese') ----Probability=(0.5-1)
  Ex.python Binarization.py --ImageSelecter=test.jpg  --clusters=3
  
  ```
